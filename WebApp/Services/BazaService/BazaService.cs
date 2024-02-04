@@ -26,7 +26,7 @@ namespace WebApp.Services.BazaService
 
         public async Task<IEnumerable<Baza_sportiva>> GetAllBaze()
         {
-            return await _bazaRepository.GetAllAsync();
+            return await _bazaRepository.GetAllBazeAsync();
         }
 
         public async Task<Baza_sportiva> GetBaza(Guid id)

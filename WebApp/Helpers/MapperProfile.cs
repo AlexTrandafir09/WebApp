@@ -17,7 +17,8 @@ namespace WebApp.Helpers
             CreateMap<Echipa,EchipaResponseDto>();
             CreateMap<EchipaRequestDto, Echipa>();
 
-            CreateMap<Baza_sportiva, BazaResponseDto>();
+            CreateMap<Baza_sportiva, BazaResponseDto>()
+                .ForMember(dest => dest.nume_echipa, opt => opt.MapFrom(src => src.echipa.denumire));
             CreateMap<BazaRequestDto, Baza_sportiva>();
 
             CreateMap<Jucator,JucatorResponseDto>();
