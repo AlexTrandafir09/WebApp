@@ -5,5 +5,7 @@ namespace WebApp.Repositories.LigaRepository
 {
     public interface ILigaRepository: IGenericRepository<Liga>
     {
+        Task<IEnumerable<Liga>> GetAllLigiAsync();
+        Task<Liga> GetLigaByIdAsync(Guid id);
     }
 }
