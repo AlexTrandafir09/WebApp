@@ -10,5 +10,7 @@ namespace WebApp.Models.Jucator
         public int numar_tricou { get; set; }
 
         public DateTime data_nasterii { get; set; }
+
+        public Echipa.Echipa echipa { get; set; }
     }
 }

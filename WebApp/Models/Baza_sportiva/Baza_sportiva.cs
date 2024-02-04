@@ -1,5 +1,4 @@
 ﻿using WebApp.Models.Base;
-
 namespace WebApp.Models.Baza_sportiva
 {
     public class Baza_sportiva : BaseEntity
@@ -9,5 +8,9 @@ namespace WebApp.Models.Baza_sportiva
         public string adresa {  get; set; } 
 
         public int capacitate { get; set;}
+
+        public int echipa_id { get; set; }
+
+        public Echipa.Echipa echipa { get; set; }
     }
 }
