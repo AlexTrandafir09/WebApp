@@ -4,8 +4,8 @@ namespace WebApp.Models.Jucator
 {
     public class Jucator:BaseEntity
     {
-        public string nume {  get; set; }
-        public string prenume {get; set; }
+        public required string nume {  get; set; }
+        public required string prenume {get; set; }
 
         public int numar_tricou { get; set; }
 
