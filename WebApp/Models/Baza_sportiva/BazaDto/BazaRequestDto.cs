@@ -6,8 +6,7 @@
 
         public required string adresa { get; set; }
 
-        public int capacitate { get; set; }
-
+        public required int capacitate { get; set; }
 
     }
 }

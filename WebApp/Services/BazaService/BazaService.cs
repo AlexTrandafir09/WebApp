@@ -39,5 +39,10 @@ namespace WebApp.Services.BazaService
             _bazaRepository.Update(baza);
             await _bazaRepository.SaveAsync();
         }
+        public async Task<Baza_sportiva> GetBazaById(Guid id)
+        {
+            return await _bazaRepository.GetBazaByIdAsync(id);
+
+        }
     }
 }

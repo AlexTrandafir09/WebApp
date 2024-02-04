@@ -12,5 +12,9 @@
         public required string baza_id { get; set; }
         public required string denumire_baza { get; set; }
 
+        public ICollection<string>? nume_jucatori { get; set; }
+
+        public ICollection<string>? nume_ligi { get; set; }
+
     }
 }

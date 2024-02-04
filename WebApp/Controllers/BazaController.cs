@@ -32,7 +32,7 @@ namespace WebApp.Controllers
         [HttpGet("{id:guid}")] //afisare o baza sportiva
         public async Task<ActionResult<BazaResponseDto>> GetBaza(Guid id)
         {
-            var baza = await _bazaService.GetBaza(id);
+            var baza = await _bazaService.GetBazaById(id);
             var bazaResponseDto = _mapper.Map<BazaResponseDto>(baza);
             return Ok(bazaResponseDto);
         }

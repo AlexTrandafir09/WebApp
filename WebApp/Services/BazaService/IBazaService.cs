@@ -11,5 +11,7 @@ namespace WebApp.Services.BazaService
         Task DeleteBaza(Baza_sportiva baza);
 
         Task UpdateBaza(Baza_sportiva baza);
+
+        Task<Baza_sportiva> GetBazaById(Guid id);
     }
 }

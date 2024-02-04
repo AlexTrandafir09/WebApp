@@ -13,5 +13,11 @@ namespace WebApp.Repositories.BazaRepository
         public async Task<IEnumerable<Baza_sportiva>> GetAllBazeAsync() {
             return await _table.Include(b => b.echipa).AsNoTracking().ToListAsync();
         }
+        public async Task<Baza_sportiva> GetBazaByIdAsync(Guid id)
+        {
+            return await _table.Where(b => b.Id == id)
+                  .AsNoTracking()
+                  .FirstOrDefaultAsync();
+        }
     }
 }
