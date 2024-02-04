@@ -11,7 +11,6 @@ namespace WebApp.Services.EchipaService
         Task DeleteEchipa(Echipa echipa);
 
         Task UpdateEchipa(Echipa echipa);
-
-
+        Task<Echipa> GetEchipaById(Guid echipa_id);
     }
 }

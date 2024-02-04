@@ -35,5 +35,10 @@ namespace WebApp.Services.EchipaService
             _echipaRepository.Update(echipa);
             await _echipaRepository.SaveAsync();
         }
+
+        public async Task<Echipa> GetEchipaById(Guid id)
+        {
+            return await _echipaRepository.GetEchipaAsync(id);
+        }
     }
 }

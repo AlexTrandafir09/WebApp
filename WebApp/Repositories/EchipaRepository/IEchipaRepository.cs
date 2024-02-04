@@ -5,5 +5,6 @@ namespace WebApp.Repositories.EchipaRepository
 {
     public interface IEchipaRepository : IGenericRepository<Echipa>
     {
+        Task<Echipa> GetEchipaAsync(Guid Id);
     }
 }

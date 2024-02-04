@@ -8,6 +8,5 @@
 
         public int? esalon { get; set; }
 
-        public ICollection<Echipa_liga.Echipa_liga> echipe_ligi { get; set; }
     }
 }

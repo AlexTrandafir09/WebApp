@@ -9,6 +9,6 @@
 
         public DateTime data_nasterii { get; set; }
 
-        public Echipa.Echipa? echipa { get; set; }
+        public string? denumire_echipa { get; set; }
     }
 }
