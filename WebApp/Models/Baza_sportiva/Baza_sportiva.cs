@@ -9,8 +9,8 @@ namespace WebApp.Models.Baza_sportiva
 
         public int capacitate { get; set;}
 
-        public int echipa_id { get; set; }
+        public Guid? echipa_id { get; set; }
 
-        public Echipa.Echipa echipa { get; set; }
+        public Echipa.Echipa? echipa { get; set; }
     }
 }

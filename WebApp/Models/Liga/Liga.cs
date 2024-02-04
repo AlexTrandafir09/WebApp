@@ -10,7 +10,7 @@ namespace WebApp.Models.Liga
 
         public int? esalon {  get; set; }
 
-        public ICollection<Echipa_liga.Echipa_liga> echipe { get; set; }
+        public ICollection<Echipa_liga.Echipa_liga> echipe_ligi { get; set; }
 
         
     }
