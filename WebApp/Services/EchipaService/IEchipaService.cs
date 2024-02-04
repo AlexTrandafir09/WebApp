@@ -1,5 +1,4 @@
 ﻿using WebApp.Models.Echipa;
-using WebApp.Repositories.EchipaRepository;
 
 namespace WebApp.Services.EchipaService
 {
