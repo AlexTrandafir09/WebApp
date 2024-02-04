@@ -9,6 +9,10 @@ namespace WebApp.Services.EchipaService
         Task CreateEchipa(Echipa echipa);
         Task<Echipa> GetEchipa(Guid id);
 
+        Task DeleteEchipa(Echipa echipa);
+
+        Task UpdateEchipa(Echipa echipa);
+
 
     }
 }

@@ -23,5 +23,17 @@ namespace WebApp.Services.EchipaService
         {
             return await _echipaRepository.FindByIdAsync(id);
         }
+
+        public async Task DeleteEchipa(Echipa echipa)
+        {
+            _echipaRepository.Delete(echipa);
+            await _echipaRepository.SaveAsync();
+        } 
+
+        public async Task UpdateEchipa(Echipa echipa)
+        {
+            _echipaRepository.Update(echipa);
+            await _echipaRepository.SaveAsync();
+        }
     }
 }
