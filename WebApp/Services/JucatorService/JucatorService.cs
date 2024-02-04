@@ -1,10 +1,9 @@
-﻿using WebApp.Models.Echipa;
-using WebApp.Models.Jucator;
+﻿using WebApp.Models.Jucator;
 using WebApp.Repositories.JucatorRepository;
 
 namespace WebApp.Services.JucatorService
 {
-    public class JucatorService :IJucatorService
+    public class JucatorService : IJucatorService
     {
         private readonly IJucatorRepository _jucatorRepository;
 
