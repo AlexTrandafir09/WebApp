@@ -11,5 +11,8 @@ namespace WebApp.Services.JucatorService
         Task DeleteJucator(Jucator jucator);
 
         Task UpdateJucator(Jucator jucator);
+
+        Task<IEnumerable<Jucator>> GetAllJucatoriAsync();
+        Task<Jucator> GetJucatorAsync(Guid id);
     }
 }

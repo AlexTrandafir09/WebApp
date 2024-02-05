@@ -39,5 +39,13 @@ namespace WebApp.Services.JucatorService
             _jucatorRepository.Update(jucator);
             await _jucatorRepository.SaveAsync();
         }
+        public async Task<IEnumerable<Jucator>> GetAllJucatoriAsync()
+        {
+            return await _jucatorRepository.GetAllJucatoriAsync();
+        }
+        public async Task<Jucator> GetJucatorAsync(Guid id)
+        {
+            return await _jucatorRepository.GetJucatorByIdAsync(id);
+        }
     }
 }

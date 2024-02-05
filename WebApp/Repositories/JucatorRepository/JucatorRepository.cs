@@ -18,6 +18,7 @@ namespace WebApp.Repositories.JucatorRepository
         public async Task<Jucator> GetJucatorByIdAsync(Guid id)
         {
             return await _table.Where(b => b.Id == id)
+                  .Include(b=>b.echipa)
                   .AsNoTracking()
                   .FirstOrDefaultAsync();
         }
