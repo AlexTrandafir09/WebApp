@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models.Baza_sportiva;
 using WebApp.Models.Baza_sportiva.BazaDto;
@@ -35,7 +36,7 @@ namespace WebApp.Controllers
             var echipaResponseDto = _mapper.Map<EchipaResponseDto>(echipa);
             return Ok(echipaResponseDto);
         }
-        [HttpPost] //creeza echipa
+        [HttpPost,Authorize] //creeza echipa
         public async Task<ActionResult<EchipaResponseDto>> CreateEchipa([FromBody] EchipaRequestDto echipaRequestDto)
         {
             var echipa1 = _mapper.Map<Echipa>(echipaRequestDto);
@@ -44,7 +45,7 @@ namespace WebApp.Controllers
             return Ok(echipaResponseDto);
         }
 
-        [HttpPut("{id:guid}")] //update echipa
+        [HttpPut("{id:guid}"), Authorize] //update echipa
         public async Task<ActionResult<EchipaResponseDto>> UpdateEchipa(Guid id, EchipaRequestDto echipa)
         {
             var _echipa = await _echipaService.GetEchipa(id);
@@ -54,7 +55,7 @@ namespace WebApp.Controllers
             return Ok(_echipaDTO);
         }
 
-        [HttpDelete("{id:guid}")] //sterge echipa
+        [HttpDelete("{id:guid}"), Authorize] //sterge echipa
         public async Task<ActionResult<EchipaResponseDto>> DeleteEchipa(Guid id)
         {
             var echipa = await _echipaService.GetEchipaAsync(id);

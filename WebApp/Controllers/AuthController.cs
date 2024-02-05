@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using WebApp.Models.User;
 using WebApp.Models.User.UserDto;
+using WebApp.Services.UserService;
 
 namespace WebApp.Controllers
 {
@@ -17,10 +19,18 @@ namespace WebApp.Controllers
     {
         public static User user =new User();
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
 
-        public AuthController(IConfiguration configuration)
+
+        public AuthController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
+            _userService = userService;
+        }
+        [HttpGet,Authorize]
+        public ActionResult<string> GetMyName()
+        {
+            return Ok(_userService.GetMyName()); 
         }
 
         [HttpPost("register")]

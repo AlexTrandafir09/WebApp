@@ -10,6 +10,7 @@ using WebApp.Models.Liga.LigaDto;
 using WebApp.Models.Jucator.JucatorDto;
 using WebApp.Services.EchipaService;
 using WebApp.Services.LigaService;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers
 {
@@ -42,7 +43,7 @@ namespace WebApp.Controllers
         }
 
 
-        [HttpPost("{liga_id:guid}/echipa/{echipa_id:guid}")] //creeaza o relatie e-l
+        [HttpPost("{liga_id:guid}/echipa/{echipa_id:guid}"),Authorize] //creeaza o relatie e-l
 
         public async Task<ActionResult<Echipa_ligaResponseDto>> AdaugaEchipa_liga(Guid liga_id, Guid echipa_id)
         {

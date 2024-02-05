@@ -40,7 +40,7 @@ namespace WebApp.Controllers
             return Ok(bazaResponseDto);
         }
 
-        [HttpPost] //creeza baza
+        [HttpPost,Authorize] //creeza baza
         public async Task<ActionResult<BazaResponseDto>> CreateBaza([FromBody] BazaRequestDto bazaRequestDto)
         {
             var baza = _mapper.Map<Baza_sportiva>(bazaRequestDto);
@@ -49,7 +49,7 @@ namespace WebApp.Controllers
             return Ok(bazaResponseDto);
         }
 
-        [HttpPut("{id:guid}")]
+        [HttpPut("{id:guid}"),Authorize]
         public async Task<ActionResult<BazaResponseDto>> UpdateBaza(Guid id, BazaRequestDto baza)
         {
             var _baza = await _bazaService.GetBaza(id);
@@ -59,7 +59,7 @@ namespace WebApp.Controllers
             return Ok(_bazaDTO);
         }
 
-        [HttpDelete("{id:guid}")]
+        [HttpDelete("{id:guid}"), Authorize]
         public async Task<ActionResult<BazaResponseDto>> DeleteBaza(Guid id)
         {
             var baza = await _bazaService.GetBaza(id);
@@ -68,7 +68,7 @@ namespace WebApp.Controllers
             return Ok(_bazaDTO);
         }
 
-        [HttpPatch("{baza_id:guid}/echipa/{echipa_id:guid}")]
+        [HttpPatch("{baza_id:guid}/echipa/{echipa_id:guid}"),Authorize]
 
         public async Task<ActionResult<BazaResponseDto>> AdaugaEchipa(Guid baza_id ,Guid echipa_id)
         {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SendGrid.Helpers.Errors.Model;
 using WebApp.Models.Baza_sportiva;
@@ -42,7 +43,7 @@ namespace WebApp.Controllers
             return Ok(jucatorResponseDto);
         }
 
-        [HttpPost] //creeza baza
+        [HttpPost,Authorize] //creeza baza
         public async Task<ActionResult<JucatorResponseDto>> CreateJucator([FromBody] JucatorRequestDto jucatorRequestDto)
         {
             var jucator = _mapper.Map<Jucator>(jucatorRequestDto);
@@ -51,7 +52,7 @@ namespace WebApp.Controllers
             return Ok(jucatorResponseDto);
         }
 
-        [HttpPut("{id:guid}")]
+        [HttpPut("{id:guid}"), Authorize]
         public async Task<ActionResult<JucatorResponseDto>> UpdateJucator(Guid id, JucatorRequestDto jucator)
         {
             var _jucator = await _jucatorService.GetJucatorAsync(id);
@@ -61,7 +62,7 @@ namespace WebApp.Controllers
             return Ok(_jucatorDTO);
         }
 
-        [HttpDelete("{id:guid}")]
+        [HttpDelete("{id:guid}"), Authorize]
         public async Task<ActionResult<JucatorResponseDto>> DeleteJucator(Guid id)
         {
             var _jucator = await _jucatorService.GetJucatorAsync(id);
@@ -70,7 +71,7 @@ namespace WebApp.Controllers
             return Ok(_jucatorDTO);
         }
 
-        [HttpPatch("{jucator_id:guid}/echipa/{echipa_id:guid}")]
+        [HttpPatch("{jucator_id:guid}/echipa/{echipa_id:guid}"),Authorize]
 
         public async Task<ActionResult<JucatorResponseDto>> AdaugaEchipa(Guid jucator_id, Guid echipa_id)
         {

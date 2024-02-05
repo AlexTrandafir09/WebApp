@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models.Baza_sportiva;
 using WebApp.Models.Baza_sportiva.BazaDto;
@@ -30,14 +31,14 @@ namespace WebApp.Controllers
             return Ok(ligaResponseDto);
         }
 
-        [HttpGet("{id:guid}")] //afisare o liga
+        [HttpGet("{id:guid}"), Authorize] //afisare o liga
         public async Task<ActionResult<LigaResponseDto>> GetLiga(Guid id)
         {
             var liga = await _ligaService.GetLigaAsync(id);
             var ligaResponseDto = _mapper.Map<LigaResponseDto>(liga);
             return Ok(ligaResponseDto);
         }
-        [HttpPost] //creeza liga
+        [HttpPost,Authorize] //creeza liga
         public async Task<ActionResult<LigaResponseDto>> CreateLiga([FromBody] LigaRequestDto ligaRequestDto)
         {
             var liga = _mapper.Map<Liga>(ligaRequestDto);
@@ -46,7 +47,7 @@ namespace WebApp.Controllers
             return Ok(ligaResponseDto);
         }
 
-        [HttpPut("{id:guid}")] //
+        [HttpPut("{id:guid}"), Authorize] //
         public async Task<ActionResult<LigaResponseDto>> UpdateLiga(Guid id, LigaRequestDto liga)
         {
             var _liga = await _ligaService.GetLiga(id);
@@ -56,7 +57,7 @@ namespace WebApp.Controllers
             return Ok(_ligaDTO);
         }
 
-        [HttpDelete("{id:guid}")]
+        [HttpDelete("{id:guid}"), Authorize]
         public async Task<ActionResult<LigaResponseDto>> DeleteLiga(Guid id)
         {
             var _liga = await _ligaService.GetLiga(id);
