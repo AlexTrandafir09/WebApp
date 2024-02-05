@@ -16,6 +16,7 @@ namespace WebApp.Data
         public DbSet<Jucator> jucatori { get; set; }
 
         public DbSet<Baza_sportiva> baze_sportive { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

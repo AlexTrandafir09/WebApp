@@ -38,7 +38,7 @@ namespace WebApp.Controllers
         [HttpGet("{id:guid}")] //afisare un jucator
         public async Task<ActionResult<JucatorResponseDto>> GetJucator(Guid id)
         {
-            var jucator= await _jucatorService.GetJucatorAsync(id);
+            var jucator = await _jucatorService.GetJucatorAsync(id);
             var jucatorResponseDto = _mapper.Map<JucatorResponseDto>(jucator);
             return Ok(jucatorResponseDto);
         }
@@ -90,7 +90,6 @@ namespace WebApp.Controllers
             await _jucatorService.UpdateJucator(jucator);
             return Ok(_mapper.Map<JucatorResponseDto>(jucator));
         }
-
 
 
 
