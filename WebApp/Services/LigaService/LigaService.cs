@@ -44,5 +44,9 @@ namespace WebApp.Services.LigaService
         {
             return await _ligaRepository.GetLigaByIdAsync(id);
         }
+        public async Task<IEnumerable<Liga>> GetAllLigiAsync()
+        {
+            return await _ligaRepository.GetAllLigiAsync();
+        }
     }
 }

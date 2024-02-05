@@ -7,6 +7,7 @@ using WebApp.Services.BazaService;
 using WebApp.Services.Echipa_ligaService;
 using WebApp.Services.EchipaService;
 using WebApp.Services.JucatorService;
+using WebApp.Services.LigaService;
 
 namespace WebApp.Helpers.Extensions
 {
@@ -32,7 +33,7 @@ namespace WebApp.Helpers.Extensions
             services.AddTransient<IEchipaService, EchipaService>();
             services.AddTransient<IEchipa_ligaService,Echipa_ligaService>();
             services.AddTransient<IJucatorService,JucatorService>();
-            services.AddTransient<ILigaRepository,LigaRepository>();
+            services.AddTransient<ILigaService,LigaService>();
 
 
 

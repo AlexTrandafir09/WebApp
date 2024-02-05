@@ -13,11 +13,11 @@ namespace WebApp.Repositories.LigaRepository
         }
             public async Task<IEnumerable<Liga>> GetAllLigiAsync()
             {
-            return await _table.Include(l => l.esalon).Include(l =>l.echipe_ligi ).AsNoTracking().ToListAsync();
+            return await _table.Include(l =>l.echipe_ligi ).AsNoTracking().ToListAsync();
             }
             public async Task<Liga> GetLigaByIdAsync(Guid id)
             {
-                return await _table.Include(l => l.esalon).Include(l => l.echipe_ligi).AsNoTracking().FirstOrDefaultAsync();
+                return await _table.Include(l => l.echipe_ligi).AsNoTracking().FirstOrDefaultAsync();
             }
     }
 }

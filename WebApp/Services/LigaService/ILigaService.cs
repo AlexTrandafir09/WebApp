@@ -13,5 +13,6 @@ namespace WebApp.Services.LigaService
         Task UpdateLiga(Liga liga);
 
         Task <Liga> GetLigaAsync(Guid id);
+        Task<IEnumerable<Liga>> GetAllLigiAsync();
     }
 }

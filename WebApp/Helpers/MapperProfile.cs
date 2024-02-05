@@ -16,7 +16,10 @@ namespace WebApp.Helpers
     {
         public MapperProfile() {
             CreateMap<Echipa, EchipaResponseDto>()
-                .ForMember(dest => dest.denumire_baza, opt => opt.MapFrom(src => src.baza.nume_baza));
+                .ForMember(dest => dest.denumire_baza, opt => opt.MapFrom(src => src.baza.nume_baza))
+                .ForMember(dest => dest.nume_jucatori, opt => opt.MapFrom(src => src.jucatori.Select(j => j.nume)))
+                .ForMember(dest => dest.nume_ligi, opt => opt.MapFrom(src => src.echipe_ligi.Where(el => el.liga != null)
+                .Select(el => el.liga.denumire)));
             CreateMap<EchipaRequestDto, Echipa>();
 
             CreateMap<Baza_sportiva, BazaResponseDto>()
@@ -28,7 +31,8 @@ namespace WebApp.Helpers
             CreateMap<JucatorRequestDto, Jucator>();
 
             CreateMap<Liga, LigaResponseDto>()
-                .ForMember(dest => dest.echipe_participante, opt => opt.MapFrom(src => src.echipe_ligi.Select(e => e.echipa_id)));
+                .ForMember(dest => dest.echipe_participante, opt => opt
+                .MapFrom(src => src.echipe_ligi.Where(el => el.echipa !=null).Select(el => el.echipa.denumire)));
             CreateMap<LigaRequestDto, Liga>();
 
             CreateMap<Echipa_liga, Echipa_ligaResponseDto>()

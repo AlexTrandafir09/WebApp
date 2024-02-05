@@ -40,5 +40,15 @@ namespace WebApp.Services.EchipaService
         {
             return await _echipaRepository.GetEchipaAsync(id);
         }
+
+        public async Task<Echipa> GetEchipaAsync(Guid id)
+        {
+            return await _echipaRepository.GetEchipaAsync(id);
+        }
+
+        public async Task<ICollection<Echipa>> GetAllEchipeAsync()
+        {
+            return await _echipaRepository.GetAllEchipeAsync();
+        }
     }
 }

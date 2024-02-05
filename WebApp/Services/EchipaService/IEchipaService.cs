@@ -12,5 +12,9 @@ namespace WebApp.Services.EchipaService
 
         Task UpdateEchipa(Echipa echipa);
         Task<Echipa> GetEchipaById(Guid echipa_id);
+
+        Task<Echipa> GetEchipaAsync(Guid id);
+
+        Task <ICollection<Echipa>> GetAllEchipeAsync();
     }
 }

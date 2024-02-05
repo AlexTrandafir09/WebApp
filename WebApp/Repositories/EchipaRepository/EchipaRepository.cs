@@ -12,9 +12,21 @@ namespace WebApp.Repositories.EchipaRepository
         }
         public async Task<Echipa> GetEchipaAsync(Guid id)
         {
-            return await _table.Where(b => b.Id == id)
+            return await _table.Include(e => e.jucatori)
+                              .Include(el => el.echipe_ligi)
+                              .Include(b => b.baza)
+                .Where(b => b.Id == id)
                   .AsNoTracking()
                   .FirstOrDefaultAsync();
         }
+        public async Task<ICollection<Echipa>> GetAllEchipeAsync()
+        {
+            return await _table.Include(e => e.jucatori)
+                              .Include(el => el.echipe_ligi)
+                              .Include(b => b.baza)
+                              .AsNoTracking()
+                              .ToListAsync();
+        }
+
     }
 }
