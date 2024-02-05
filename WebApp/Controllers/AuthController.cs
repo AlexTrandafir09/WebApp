@@ -57,7 +57,9 @@ namespace WebApp.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim (ClaimTypes.Name, user.Username)
+                new Claim (ClaimTypes.Name, user.Username),
+                new Claim (ClaimTypes.Role,"Admin"),
+                new Claim (ClaimTypes.Role,"User")
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8

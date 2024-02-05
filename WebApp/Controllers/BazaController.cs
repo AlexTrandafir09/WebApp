@@ -23,7 +23,7 @@ namespace WebApp.Controllers
             _echipaService = echipaService;
         }
 
-        [HttpGet] //afisare toate bazele sportive
+        [HttpGet, Authorize(Roles ="Admin")] //afisare toate bazele sportive
 
         public async Task<ActionResult<IEnumerable<BazaResponseDto>>> GetAllBaze()
         {
