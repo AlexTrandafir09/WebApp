@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SendGrid.Helpers.Errors.Model;
+using WebApp.Models.Baza_sportiva;
+using WebApp.Models.Baza_sportiva.BazaDto;
 using WebApp.Models.Jucator;
 using WebApp.Models.Jucator.JucatorDto;
 using WebApp.Services.EchipaService;
@@ -23,24 +25,68 @@ namespace WebApp.Controllers
             _echipaService = echipaService;
         }
 
-        [HttpPost("{idechipa:guid}")]
-        public async Task<ActionResult<JucatorResponseDto>> CreateJucator(Guid? idechipa, [FromBody] JucatorRequestDto jucatorRequestDto)
-        {
-            Jucator jucator; 
-            if (idechipa.HasValue)
-            {
-                var echipa = _echipaService.GetEchipaById(idechipa.Value);
-                if (echipa == null)
-                    throw new NotFoundException("echipa not found");
+        [HttpGet] //afisare toti jucatorii
 
-                jucator = _mapper.Map<Jucator>(jucatorRequestDto);
-                jucator.echipa_id = idechipa.Value;
-            }
-            else
+        public async Task<ActionResult<IEnumerable<JucatorResponseDto>>> GetAllJucator()
+        {
+            var jucatori = await _jucatorService.GetAllJucatoriAsync();
+            var jucatorResponseDto = _mapper.Map<IEnumerable<JucatorResponseDto>>(jucatori);
+            return Ok(jucatorResponseDto);
+        }
+
+        [HttpGet("{id:guid}")] //afisare un jucator
+        public async Task<ActionResult<JucatorResponseDto>> GetJucator(Guid id)
+        {
+            var jucator= await _jucatorService.GetJucatorAsync(id);
+            var jucatorResponseDto = _mapper.Map<JucatorResponseDto>(jucator);
+            return Ok(jucatorResponseDto);
+        }
+
+        [HttpPost] //creeza baza
+        public async Task<ActionResult<JucatorResponseDto>> CreateJucator([FromBody] JucatorRequestDto jucatorRequestDto)
+        {
+            var jucator = _mapper.Map<Jucator>(jucatorRequestDto);
+            var new_jucator = await _jucatorService.CreateJucator(jucator);
+            var jucatorResponseDto = _mapper.Map<JucatorResponseDto>(new_jucator);
+            return Ok(jucatorResponseDto);
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<JucatorResponseDto>> UpdateJucator(Guid id, JucatorRequestDto jucator)
+        {
+            var _jucator = await _jucatorService.GetJucatorAsync(id);
+            _mapper.Map(jucator, _jucator);
+            await _jucatorService.UpdateJucator(_jucator);
+            var _jucatorDTO = _mapper.Map<JucatorResponseDto>(_jucator);
+            return Ok(_jucatorDTO);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult<JucatorResponseDto>> DeleteJucator(Guid id)
+        {
+            var _jucator = await _jucatorService.GetJucatorAsync(id);
+            await _jucatorService.DeleteJucator(_jucator);
+            var _jucatorDTO = _mapper.Map<JucatorResponseDto>(_jucator);
+            return Ok(_jucatorDTO);
+        }
+
+        [HttpPatch("{jucator_id:guid}/echipa/{echipa_id:guid}")]
+
+        public async Task<ActionResult<JucatorResponseDto>> AdaugaEchipa(Guid jucator_id, Guid echipa_id)
+        {
+            var jucator = await _jucatorService.GetJucatorAsync(jucator_id);
+            if (jucator == null)
             {
-                jucator = _mapper.Map<Jucator>(jucatorRequestDto);
+                return NotFound("nu exista jucator cu id ul dat");
             }
-            await _jucatorService.CreateJucator(jucator);
+            var echipa = await _echipaService.GetEchipaAsync(echipa_id);
+            if (echipa == null)
+            {
+                return NotFound("nu exista echipa cu id ul dat");
+            }
+            jucator.echipa_id = echipa_id;
+            jucator.echipa = echipa;
+            await _jucatorService.UpdateJucator(jucator);
             return Ok(_mapper.Map<JucatorResponseDto>(jucator));
         }
 

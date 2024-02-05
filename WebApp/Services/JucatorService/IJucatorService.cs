@@ -5,7 +5,7 @@ namespace WebApp.Services.JucatorService
     public interface IJucatorService
     {
         Task<IEnumerable<Jucator>> GetAllJucatori();
-        Task CreateJucator(Jucator jucator);
+        Task<Jucator> CreateJucator(Jucator jucator);
         Task<Jucator> GetJucator(Guid id);
 
         Task DeleteJucator(Jucator jucator);

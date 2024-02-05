@@ -12,10 +12,11 @@ namespace WebApp.Services.JucatorService
             _jucatorRepository = jucatorRepository;
         }
 
-        public async Task CreateJucator(Jucator jucator)
+        public async Task<Jucator> CreateJucator(Jucator jucator)
         {
             await _jucatorRepository.CreateAsync(jucator);
             await _jucatorRepository.SaveAsync();
+            return jucator;
         }
 
         public async Task DeleteJucator(Jucator jucator)

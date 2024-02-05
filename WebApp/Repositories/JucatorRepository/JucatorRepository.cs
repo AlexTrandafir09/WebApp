@@ -19,7 +19,6 @@ namespace WebApp.Repositories.JucatorRepository
         {
             return await _table.Where(b => b.Id == id)
                   .Include(b=>b.echipa)
-                  .AsNoTracking()
                   .FirstOrDefaultAsync();
         }
     }
