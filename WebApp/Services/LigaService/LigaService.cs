@@ -40,5 +40,9 @@ namespace WebApp.Services.LigaService
             _ligaRepository.Update(liga);
             await _ligaRepository.SaveAsync();
         }
+        public async Task<Liga> GetLigaAsync(Guid id)
+        {
+            return await _ligaRepository.GetLigaByIdAsync(id);
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace WebApp.Services.LigaService
         Task DeleteLiga(Liga liga);
 
         Task UpdateLiga(Liga liga);
+
+        Task <Liga> GetLigaAsync(Guid id);
     }
 }
