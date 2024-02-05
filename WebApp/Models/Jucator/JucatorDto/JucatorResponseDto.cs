@@ -9,6 +9,8 @@
 
         public DateTime data_nasterii { get; set; }
 
+        public int id_echipa { get; set; }
+
         public string? denumire_echipa { get; set; }
     }
 }

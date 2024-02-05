@@ -16,7 +16,6 @@ namespace WebApp.Repositories.EchipaRepository
                               .Include(el => el.echipe_ligi)
                               .Include(b => b.baza)
                 .Where(b => b.Id == id)
-                  .AsNoTracking()
                   .FirstOrDefaultAsync();
         }
         public async Task<ICollection<Echipa>> GetAllEchipeAsync()

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp.Models.Baza_sportiva;
 using WebApp.Models.Baza_sportiva.BazaDto;
 using WebApp.Services.BazaService;
+using WebApp.Services.EchipaService;
 
 namespace WebApp.Controllers
 {
@@ -13,11 +14,13 @@ namespace WebApp.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IBazaService _bazaService;
+        private readonly IEchipaService _echipaService;
 
-        public BazaController(IMapper mapper,IBazaService bazaService1)
+        public BazaController(IMapper mapper,IBazaService bazaService1, IEchipaService echipaService)
         {
             _mapper = mapper;
-            _bazaService=bazaService1;
+            _bazaService = bazaService1;
+            _echipaService = echipaService;
         }
 
         [HttpGet] //afisare toate bazele sportive
@@ -41,8 +44,8 @@ namespace WebApp.Controllers
         public async Task<ActionResult<BazaResponseDto>> CreateBaza([FromBody] BazaRequestDto bazaRequestDto)
         {
             var baza = _mapper.Map<Baza_sportiva>(bazaRequestDto);
-            await _bazaService.CreateBaza(baza);
-            var bazaResponseDto = _mapper.Map<BazaResponseDto>(baza);
+            var new_baza=await _bazaService.CreateBaza(baza);
+            var bazaResponseDto = _mapper.Map<BazaResponseDto>(new_baza);
             return Ok(bazaResponseDto);
         }
 
@@ -63,6 +66,26 @@ namespace WebApp.Controllers
             await _bazaService.DeleteBaza(baza);
             var _bazaDTO = _mapper.Map<BazaResponseDto>(baza);
             return Ok(_bazaDTO);
+        }
+
+        [HttpPatch("{baza_id:guid}/echipa/{echipa_id:guid}")]
+
+        public async Task<ActionResult<BazaResponseDto>> AdaugaEchipa(Guid baza_id ,Guid echipa_id)
+        {
+            var baza= await _bazaService.GetBazaById(baza_id);
+            if(baza == null)
+            {
+                return NotFound("nu exista baza cu id ul dat");
+            }
+            var echipa = await _echipaService.GetEchipaAsync(echipa_id);
+            if(echipa  == null)
+            {
+                return NotFound("nu exista echipa cu id ul dat");
+            }
+            baza.echipa_id = echipa_id;
+            baza.echipa = echipa;
+            await _bazaService.UpdateBaza(baza);
+            return Ok(_mapper.Map<BazaResponseDto>(baza));
         }
 
     }

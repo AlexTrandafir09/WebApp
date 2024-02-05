@@ -14,10 +14,11 @@ namespace WebApp.Services.EchipaService
         {
             return await _echipaRepository.GetAllAsync();
         }
-        public async Task CreateEchipa(Echipa echipa)
+        public async Task<Echipa> CreateEchipa(Echipa echipa)
         {
             await _echipaRepository.CreateAsync(echipa);
             await _echipaRepository.SaveAsync();
+            return echipa;
         }
         public async Task<Echipa> GetEchipa(Guid id)
         {

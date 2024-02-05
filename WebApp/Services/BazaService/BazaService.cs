@@ -12,10 +12,11 @@ namespace WebApp.Services.BazaService
             _bazaRepository = bazaRepository;
         }
 
-        public async Task CreateBaza(Baza_sportiva baza)
+        public async Task<Baza_sportiva> CreateBaza(Baza_sportiva baza)
         {
             await _bazaRepository.CreateAsync(baza);
             await _bazaRepository.SaveAsync();
+            return baza;
         }
 
         public async Task DeleteBaza(Baza_sportiva baza)

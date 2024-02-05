@@ -17,7 +17,6 @@ namespace WebApp.Repositories.BazaRepository
         {
             return await _table.Where(b => b.Id == id)
                   .Include(b => b.echipa)
-                  .AsNoTracking()
                   .FirstOrDefaultAsync();
         }
     }

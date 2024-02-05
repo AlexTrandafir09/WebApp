@@ -39,8 +39,8 @@ namespace WebApp.Controllers
         public async Task<ActionResult<EchipaResponseDto>> CreateEchipa([FromBody] EchipaRequestDto echipaRequestDto)
         {
             var echipa1 = _mapper.Map<Echipa>(echipaRequestDto);
-            await _echipaService.CreateEchipa(echipa1);
-            var echipaResponseDto = _mapper.Map<EchipaResponseDto>(echipa1);
+            var new_echipa= await _echipaService.CreateEchipa(echipa1);
+            var echipaResponseDto = _mapper.Map<EchipaResponseDto>(new_echipa);
             return Ok(echipaResponseDto);
         }
 

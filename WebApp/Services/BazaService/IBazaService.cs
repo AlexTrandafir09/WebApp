@@ -5,7 +5,7 @@ namespace WebApp.Services.BazaService
     public interface IBazaService
     {
         Task<IEnumerable<Baza_sportiva>> GetAllBaze();
-        Task CreateBaza(Baza_sportiva baza);
+        Task<Baza_sportiva> CreateBaza(Baza_sportiva baza);
         Task<Baza_sportiva> GetBaza(Guid id);
 
         Task DeleteBaza(Baza_sportiva baza);

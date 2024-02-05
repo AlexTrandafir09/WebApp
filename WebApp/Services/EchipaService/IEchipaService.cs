@@ -5,7 +5,7 @@ namespace WebApp.Services.EchipaService
     public interface IEchipaService
     {
         Task<IEnumerable<Echipa>> GetAllEchipe();
-        Task CreateEchipa(Echipa echipa);
+        Task<Echipa> CreateEchipa(Echipa echipa);
         Task<Echipa> GetEchipa(Guid id);
 
         Task DeleteEchipa(Echipa echipa);
