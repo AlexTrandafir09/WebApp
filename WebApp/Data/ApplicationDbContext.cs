@@ -22,17 +22,18 @@ namespace WebApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Echipa_liga>().HasKey(el => new {el.Echipa_id, el.Liga_id});
 
             modelBuilder.Entity<Echipa_liga>()
                 .HasOne(e => e.echipa)
                 .WithMany(el => el.echipe_ligi)
-                .HasForeignKey(l => l.liga_id);
+                .HasForeignKey(l => l.Liga_id);
 
 
             modelBuilder.Entity<Echipa_liga>()
                 .HasOne(l => l.liga)
                 .WithMany(el => el.echipe_ligi)
-                .HasForeignKey(e => e.echipa_id);
+                .HasForeignKey(e => e.Echipa_id);
 
             modelBuilder.Entity<Jucator>()
                 .HasOne(e => e.echipa)
