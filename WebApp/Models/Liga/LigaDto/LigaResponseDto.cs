@@ -9,6 +9,6 @@
 
         public int? esalon { get; set; }
 
-        public ICollection<string>? echipe_participante { get; set; }
+        public ICollection<Guid>? echipe_participante { get; set; }
     }
 }

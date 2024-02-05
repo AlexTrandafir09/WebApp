@@ -16,6 +16,7 @@ namespace WebApp.Repositories.BazaRepository
         public async Task<Baza_sportiva> GetBazaByIdAsync(Guid id)
         {
             return await _table.Where(b => b.Id == id)
+                  .Include(b => b.echipa)
                   .AsNoTracking()
                   .FirstOrDefaultAsync();
         }
