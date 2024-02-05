@@ -38,7 +38,7 @@ namespace WebApp.Controllers
             var ligaResponseDto = _mapper.Map<LigaResponseDto>(liga);
             return Ok(ligaResponseDto);
         }
-        [HttpPost,Authorize] //creeza liga
+        [HttpPost, Authorize(Roles = "Admin")] //creeza liga
         public async Task<ActionResult<LigaResponseDto>> CreateLiga([FromBody] LigaRequestDto ligaRequestDto)
         {
             var liga = _mapper.Map<Liga>(ligaRequestDto);
@@ -47,7 +47,7 @@ namespace WebApp.Controllers
             return Ok(ligaResponseDto);
         }
 
-        [HttpPut("{id:guid}"), Authorize] //
+        [HttpPut("{id:guid}"), Authorize(Roles = "Admin")] //
         public async Task<ActionResult<LigaResponseDto>> UpdateLiga(Guid id, LigaRequestDto liga)
         {
             var _liga = await _ligaService.GetLiga(id);
@@ -57,7 +57,7 @@ namespace WebApp.Controllers
             return Ok(_ligaDTO);
         }
 
-        [HttpDelete("{id:guid}"), Authorize]
+        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<LigaResponseDto>> DeleteLiga(Guid id)
         {
             var _liga = await _ligaService.GetLiga(id);

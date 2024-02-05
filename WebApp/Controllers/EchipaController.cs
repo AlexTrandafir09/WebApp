@@ -36,7 +36,7 @@ namespace WebApp.Controllers
             var echipaResponseDto = _mapper.Map<EchipaResponseDto>(echipa);
             return Ok(echipaResponseDto);
         }
-        [HttpPost,Authorize] //creeza echipa
+        [HttpPost, Authorize(Roles = "Admin")] //creeza echipa
         public async Task<ActionResult<EchipaResponseDto>> CreateEchipa([FromBody] EchipaRequestDto echipaRequestDto)
         {
             var echipa1 = _mapper.Map<Echipa>(echipaRequestDto);
@@ -45,7 +45,7 @@ namespace WebApp.Controllers
             return Ok(echipaResponseDto);
         }
 
-        [HttpPut("{id:guid}"), Authorize] //update echipa
+        [HttpPut("{id:guid}"), Authorize(Roles = "Admin")] //update echipa
         public async Task<ActionResult<EchipaResponseDto>> UpdateEchipa(Guid id, EchipaRequestDto echipa)
         {
             var _echipa = await _echipaService.GetEchipa(id);
@@ -55,7 +55,7 @@ namespace WebApp.Controllers
             return Ok(_echipaDTO);
         }
 
-        [HttpDelete("{id:guid}"), Authorize] //sterge echipa
+        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin")] //sterge echipa
         public async Task<ActionResult<EchipaResponseDto>> DeleteEchipa(Guid id)
         {
             var echipa = await _echipaService.GetEchipaAsync(id);

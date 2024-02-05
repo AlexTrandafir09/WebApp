@@ -43,7 +43,7 @@ namespace WebApp.Controllers
             return Ok(jucatorResponseDto);
         }
 
-        [HttpPost,Authorize] //creeza baza
+        [HttpPost, Authorize(Roles = "Admin")] //creeza baza
         public async Task<ActionResult<JucatorResponseDto>> CreateJucator([FromBody] JucatorRequestDto jucatorRequestDto)
         {
             var jucator = _mapper.Map<Jucator>(jucatorRequestDto);
@@ -52,7 +52,7 @@ namespace WebApp.Controllers
             return Ok(jucatorResponseDto);
         }
 
-        [HttpPut("{id:guid}"), Authorize]
+        [HttpPut("{id:guid}"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<JucatorResponseDto>> UpdateJucator(Guid id, JucatorRequestDto jucator)
         {
             var _jucator = await _jucatorService.GetJucatorAsync(id);
@@ -62,7 +62,7 @@ namespace WebApp.Controllers
             return Ok(_jucatorDTO);
         }
 
-        [HttpDelete("{id:guid}"), Authorize]
+        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<JucatorResponseDto>> DeleteJucator(Guid id)
         {
             var _jucator = await _jucatorService.GetJucatorAsync(id);
@@ -71,7 +71,7 @@ namespace WebApp.Controllers
             return Ok(_jucatorDTO);
         }
 
-        [HttpPatch("{jucator_id:guid}/echipa/{echipa_id:guid}"),Authorize]
+        [HttpPatch("{jucator_id:guid}/echipa/{echipa_id:guid}"), Authorize(Roles = "Admin")]
 
         public async Task<ActionResult<JucatorResponseDto>> AdaugaEchipa(Guid jucator_id, Guid echipa_id)
         {

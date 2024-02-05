@@ -23,7 +23,7 @@ namespace WebApp.Controllers
             _echipaService = echipaService;
         }
 
-        [HttpGet, Authorize(Roles ="Admin")] //afisare toate bazele sportive
+        [HttpGet] //afisare toate bazele sportive
 
         public async Task<ActionResult<IEnumerable<BazaResponseDto>>> GetAllBaze()
         {
@@ -40,7 +40,7 @@ namespace WebApp.Controllers
             return Ok(bazaResponseDto);
         }
 
-        [HttpPost,Authorize] //creeza baza
+        [HttpPost, Authorize(Roles = "Admin")] //creeza baza
         public async Task<ActionResult<BazaResponseDto>> CreateBaza([FromBody] BazaRequestDto bazaRequestDto)
         {
             var baza = _mapper.Map<Baza_sportiva>(bazaRequestDto);
@@ -49,7 +49,7 @@ namespace WebApp.Controllers
             return Ok(bazaResponseDto);
         }
 
-        [HttpPut("{id:guid}"),Authorize]
+        [HttpPut("{id:guid}"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<BazaResponseDto>> UpdateBaza(Guid id, BazaRequestDto baza)
         {
             var _baza = await _bazaService.GetBaza(id);
@@ -59,7 +59,7 @@ namespace WebApp.Controllers
             return Ok(_bazaDTO);
         }
 
-        [HttpDelete("{id:guid}"), Authorize]
+        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<BazaResponseDto>> DeleteBaza(Guid id)
         {
             var baza = await _bazaService.GetBaza(id);
@@ -68,7 +68,7 @@ namespace WebApp.Controllers
             return Ok(_bazaDTO);
         }
 
-        [HttpPatch("{baza_id:guid}/echipa/{echipa_id:guid}"),Authorize]
+        [HttpPatch("{baza_id:guid}/echipa/{echipa_id:guid}"), Authorize(Roles = "Admin")]
 
         public async Task<ActionResult<BazaResponseDto>> AdaugaEchipa(Guid baza_id ,Guid echipa_id)
         {
@@ -87,6 +87,7 @@ namespace WebApp.Controllers
             await _bazaService.UpdateBaza(baza);
             return Ok(_mapper.Map<BazaResponseDto>(baza));
         }
+
 
     }
 }
